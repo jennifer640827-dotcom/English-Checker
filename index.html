@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Checker — 商務英文助理</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>English Checker</h1>
+    <p class="subtitle">商務英文助理</p>
+  </header>
+
+  <main>
+    <nav class="mode-tabs">
+      <button class="tab-btn active" data-mode="zh2en">中 → 英</button>
+      <button class="tab-btn" data-mode="en2zh">英 → 中</button>
+      <button class="tab-btn" data-mode="proofread">英文校對</button>
+    </nav>
+
+    <section class="input-section">
+      <label class="section-label" for="input-text">輸入文字</label>
+      <textarea id="input-text" placeholder="貼入商務信件內容..."></textarea>
+      <div class="input-actions">
+        <button id="btn-clear" class="btn-secondary">清除</button>
+        <button id="btn-submit" class="btn-primary">執行</button>
+      </div>
+    </section>
+
+    <section class="result-section" id="result-section" hidden>
+      <div id="result-area"></div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="api-key-bar">
+      <label for="api-key-input">Gemini API Key</label>
+      <input type="password" id="api-key-input" placeholder="貼入你的 Google AI Studio API Key">
+      <button id="btn-save-key" class="btn-secondary">儲存</button>
+      <span id="key-status"></span>
+    </div>
+    <p class="api-hint">API Key 請至 <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a> 免費申請</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
