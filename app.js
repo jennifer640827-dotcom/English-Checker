@@ -56,9 +56,41 @@ const apiKeyInput  = document.getElementById('api-key-input');
 const btnSaveKey   = document.getElementById('btn-save-key');
 const keyStatus    = document.getElementById('key-status');
 
+// ── Auth ──
+
+const PASSWORD = 'englishchecker0827';
+
+function initAuth() {
+  const overlay   = document.getElementById('auth-overlay');
+  const authInput = document.getElementById('auth-input');
+  const authBtn   = document.getElementById('auth-btn');
+  const authError = document.getElementById('auth-error');
+
+  if (sessionStorage.getItem('ec_auth') === '1') {
+    overlay.classList.add('hidden');
+    return;
+  }
+
+  function attempt() {
+    if (authInput.value === PASSWORD) {
+      sessionStorage.setItem('ec_auth', '1');
+      overlay.classList.add('hidden');
+    } else {
+      authError.hidden = false;
+      authInput.value = '';
+      authInput.focus();
+    }
+  }
+
+  authBtn.addEventListener('click', attempt);
+  authInput.addEventListener('keydown', e => { if (e.key === 'Enter') attempt(); });
+}
+
 // ── Init ──
 
 function init() {
+  initAuth();
+
   const savedKey = localStorage.getItem(STORAGE_KEY);
   if (savedKey) {
     apiKeyInput.value = savedKey;
