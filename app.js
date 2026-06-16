@@ -1,6 +1,6 @@
 'use strict';
 
-const MODEL = 'gemini-2.0-flash';
+const MODEL = 'gemini-2.5-flash';
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent`;
 const STORAGE_KEY = 'gemini_api_key';
 
@@ -145,8 +145,10 @@ async function callGeminiAPI(systemPrompt, userText) {
 
   if (!response.ok) {
     const err = await response.json().catch(() => ({}));
-    const msg = err?.error?.message || `HTTP ${response.status}`;
-    throw new Error(`API 呼叫失敗：${msg}`);
+    const code = err?.error?.code || response.status;
+    const msg  = err?.error?.message || '未知錯誤';
+    const status = err?.error?.status || '';
+    throw new Error(`API 錯誤 ${code}（${status}）：${msg}`);
   }
 
   const data = await response.json();
